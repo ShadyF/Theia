@@ -71,7 +71,7 @@ def scale(canvas, factor):
 
     # x_ratio = original width / modified width
     # y_ratio = original height / modified height
-    
+
     scaling_factor = 1 / (factor / 100)
 
     for x in range(x_size):
@@ -87,3 +87,24 @@ def scale(canvas, factor):
     canvas.image = tk_img       # Reference for Python's GC
     config.current_image = new_img      # Keep reference of current image
 
+
+def shear(canvas, factor, x_shear):
+    curr = config.current_image.load()
+    x_size = config.current_image.size[0]
+    y_size = config.current_image.size[1]
+    if x_shear:
+        new_img = PIL.Image.new('RGB', (x_size + int(factor * y_size), y_size))
+    else:
+        new_img = PIL.Image.new('RGB', (x_size, y_size + int(factor * x_size)))
+
+    for x in range(x_size):
+        for y in range(y_size):
+            rgb_val = curr[x, y]
+            x_new = x + int(factor * y) if x_shear else x
+            y_new = y if x_shear else y + int(factor * x)
+            new_img.putpixel((x_new, y_new), rgb_val)
+
+    tk_img = ImageTk.PhotoImage(new_img)
+    canvas.create_image(400, 300, image=tk_img)     # (xpos, ypos, imgsrc)
+    canvas.image = tk_img       # Reference for Python's GC
+    config.current_image = new_img      # Keep reference of current image

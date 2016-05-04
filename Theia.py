@@ -85,8 +85,39 @@ scaling_button = ttk.Button(buttons_frame, text="Scale", command=lambda: scale(c
 scaling_button.grid(row=11, column=2, sticky=(W, E))
 
 ttk.Separator(buttons_frame, orient=HORIZONTAL).grid(row=12, columnspan=3, sticky=(W, E), pady=10)
+
 ####################
 # Shearing Section #
 ####################
+
+ttk.Label(buttons_frame, text="Shearing").grid(row=13, column=1, columnspan=2, pady=(0, 8))
+ttk.Label(buttons_frame, text="ƛ").grid(row=14, column=1)
+
+#################################
+#     X Direction Shearing      #
+#################################
+shearing_factor_x = ttk.Entry(buttons_frame, width=5)
+shearing_factor_x.grid(row=15, column=1)
+
+shearing_button_x = ttk.Button(buttons_frame, text="X dir. Shear",
+                               command=lambda: shear(canvas, float(shearing_factor_x.get()), True))
+shearing_button_x.grid(row=15, column=2, sticky=(W, E))
+
+#################################
+#     Y Direction Shearing      #
+#################################
+
+shearing_factor_y = ttk.Entry(buttons_frame, width=5)
+shearing_factor_y.grid(row=16, column=1)
+
+shearing_button_y = ttk.Button(buttons_frame, text="Y dir. shear",
+                               command=lambda: shear(canvas, float(shearing_factor_y.get()), False))
+shearing_button_y.grid(row=16, column=2, sticky=(W, E))
+
+ttk.Separator(buttons_frame, orient=HORIZONTAL).grid(row=17, columnspan=3, sticky=(W, E), pady=10)
+
+#####################
+# Filtering Section #
+#####################
 
 root.mainloop()
