@@ -60,5 +60,30 @@ def translate(canvas, xx, yy, wrap_around):
     canvas.image = tk_img       # Reference for Python's GC
     config.current_image = new_img      # Keep reference of current image
 
-def scale(canvas):
-    pass
+
+def scale(canvas, factor):
+    from math import floor
+    curr = config.current_image.load()
+    x_size = config.current_image.size[0]
+    y_size = config.current_image.size[1]
+
+    new_img = PIL.Image.new('RGB', (x_size, y_size))
+
+    # x_ratio = original width / modified width
+    # y_ratio = original height / modified height
+    
+    scaling_factor = 1 / (factor / 100)
+
+    for x in range(x_size):
+        for y in range(y_size):
+            px = floor(x * scaling_factor)
+            py = floor(y * scaling_factor)
+            if px in range(x_size) and py in range(y_size):
+                rgb_val = curr[px, py]
+                new_img.putpixel((x, y), rgb_val)
+
+    tk_img = ImageTk.PhotoImage(new_img)
+    canvas.create_image(400, 300, image=tk_img)     # (xpos, ypos, imgsrc)
+    canvas.image = tk_img       # Reference for Python's GC
+    config.current_image = new_img      # Keep reference of current image
+
