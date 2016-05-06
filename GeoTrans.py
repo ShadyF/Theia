@@ -1,7 +1,6 @@
 import config
 import PIL.Image
 from PIL import ImageTk
-#import numpy as np
 
 
 def rotate(canvas, left):

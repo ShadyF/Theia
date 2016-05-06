@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 from GeoTrans import *
+from ImageFiltering import *
 import config
 
 
@@ -91,7 +92,7 @@ ttk.Separator(buttons_frame, orient=HORIZONTAL).grid(row=12, columnspan=3, stick
 ####################
 
 ttk.Label(buttons_frame, text="Shearing").grid(row=13, column=1, columnspan=2, pady=(0, 8))
-ttk.Label(buttons_frame, text="ƛ").grid(row=14, column=1)
+ttk.Label(buttons_frame, text="Lambda").grid(row=14, column=1)
 
 #################################
 #     X Direction Shearing      #
@@ -120,4 +121,54 @@ ttk.Separator(buttons_frame, orient=HORIZONTAL).grid(row=17, columnspan=3, stick
 # Filtering Section #
 #####################
 
+ttk.Label(buttons_frame, text="Filtering").grid(row=18, column=1, columnspan=2, pady=(0, 8))
+
+matrix_frame = ttk.Frame(buttons_frame)
+matrix_frame.grid(row=19, column=1, columnspan=2)
+
+#########
+# ROW 1 #
+#########
+
+a11 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a11.grid(row=0, column=0, padx=4, pady=4)
+
+a12 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a12.grid(row=0, column=1, padx=4, pady=4)
+
+a13 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a13.grid(row=0, column=2, padx=4, pady=4)
+
+#########
+# ROW 2 #
+#########
+
+a21 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a21.grid(row=1, column=0, padx=4, pady=4)
+
+a22 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a22.grid(row=1, column=1, padx=4, pady=4)
+
+a23 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a23.grid(row=1, column=2, padx=4, pady=4)
+
+#########
+# ROW 3 #
+#########
+
+a31 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a31.grid(row=2, column=0, padx=4, pady=4)
+
+a32 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a32.grid(row=2, column=1, padx=4, pady=4)
+
+a33 = ttk.Entry(matrix_frame, width=3, justify=CENTER)
+a33.grid(row=2, column=2, padx=4, pady=4)
+
+filter_button = ttk.Button(buttons_frame, text="Filter",
+                           command=lambda: filter(canvas, [ [float(a11.get()), float(a12.get()), float(a13.get())],
+                                                            [float(a21.get()), float(a22.get()), float(a23.get())],
+                                                            [float(a31.get()), float(a32.get()), float(a33.get())] ] ) )
+
+filter_button.grid(row=20, column=1, columnspan=2, sticky=(W, E))
 root.mainloop()
