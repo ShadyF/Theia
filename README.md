@@ -15,9 +15,9 @@ Tested on Ubuntu 14.04 and Windows 7/8/10
 
 ### Dependencies
 1. Tkinter (GUI Interface)
-  *Comes pre-installed with python
+   * Comes pre-installed with python
 2. Pillow (Image Library)
-  *``` sudo pip3 install Pillow
+   * ``` sudo pip3 install Pillow```
   
 ### Building
 ```python3 Theia.py```
